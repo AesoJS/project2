@@ -11,7 +11,7 @@
     <!-- Display Backend Status -->
     <div class="backend-status">
       <div v-if="backendStatus">
-        <p> {{ backendStatus.message }}</p>
+        <p>{{ backendStatus.message }}</p>
       </div>
       <div v-else>
         <p>Loading backend status...</p>
@@ -25,7 +25,7 @@ import { defineComponent } from 'vue';
 import navbar from "@/components/NavBar.vue";
 import axios from 'axios';
 
-// Define an interface for the backend status response
+// Define the interface for the backend status response
 interface BackendStatus {
   message: string;
 }
@@ -36,26 +36,26 @@ export default defineComponent({
   },
   data() {
     return {
-      backendStatus: null as BackendStatus | null,  // Define the type explicitly
+      backendStatus: null as BackendStatus | null,  // Type explicitly to allow backend status data
     };
   },
   mounted() {
-    this.fetchBackendStatus();  // Fetch the backend status when the component is mounted
+    this.fetchBackendStatus();  // Fetch backend status once the component is mounted
   },
   methods: {
-    // Use Axios to fetch backend status
+    // Fetch the backend status using Axios
     fetchBackendStatus() {
-      const apiUrl = process.env.VUE_APP_API_URL || 'http://localhost:8080'; // Fallback to localhost if not set
-      axios.get<BackendStatus>(`${apiUrl}/test`) // Define the expected response type
-          .then(response => {
-            this.backendStatus = response.data;
+      const apiUrl = process.env.VUE_APP_API_URL || "https://election-backend-cmsa.onrender.com";  // Fallback to your Render backend URL
+      axios.get(`${apiUrl}/test`)  // Make the API request to the backend `/test` endpoint
+          .then((response) => {
+            this.backendStatus = response.data;  // Set the response data as the backend status
           })
-          .catch(error => {
-            console.error('Error fetching backend status:', error);
-            this.backendStatus = { message: 'Error connecting to backend' }; // Fallback to an error message
+          .catch((error) => {
+            console.error("Error fetching backend status:", error);
+            this.backendStatus = { message: "Error connecting to backend" };  // Fallback error message
           });
-    }
-  }
+    },
+  },
 });
 </script>
 

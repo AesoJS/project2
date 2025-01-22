@@ -15,25 +15,19 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     // Enable CORS globally for your frontend URL
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        String frontendUrl = System.getenv("FRONTEND_URL");  // Get frontend URL from environment variable
-        if (frontendUrl == null || frontendUrl.isEmpty()) {
-            frontendUrl = "http://localhost:5173";  // Default to localhost during local development
-        }
-
         registry.addMapping("/**")  // Apply to all endpoints
-                .allowedOrigins(frontendUrl)  // Use dynamic frontend URL
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("Content-Type", "Authorization")
-                .allowCredentials(true); // Allow credentials if needed
+                .allowedOrigins("https://election-frontendd.onrender.com")  // Allow your frontend domain
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Allow common HTTP methods
+                .allowedHeaders("Content-Type", "Authorization")  // Allow these headers
+                .allowCredentials(true);  // Allow credentials if needed (cookies, session)
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // Disable Spring Security for APIs and allow all requests
         http
-                .csrf().disable()  // Disable CSRF protection (optional for APIs)
+                .csrf().disable()  // Disable CSRF protection (for simplicity in this case)
                 .authorizeRequests()
-                .anyRequest().permitAll();  // Allow all requests without authentication
+                .anyRequest().permitAll();  // Allow all requests (for simplicity in this case)
 
         return http.build();
     }

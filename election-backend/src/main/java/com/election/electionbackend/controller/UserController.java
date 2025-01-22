@@ -5,21 +5,17 @@ import com.election.electionbackend.service.UserService;
 import com.election.electionbackend.util.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "${app.frontend.url}")  // Dynamic CORS Origin
+@CrossOrigin(origins = "https://election-frontendd.onrender.com") // Allow CORS for the Render frontend
 public class UserController {
 
     private final UserService userService;
     private final JwtUtil jwtUtil;
-
-    @Value("${app.frontend.url}")
-    private String frontendUrl;  // Inject the frontend URL from the environment
 
     public UserController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;

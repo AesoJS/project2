@@ -9,10 +9,17 @@ public class APIconfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOriginPatterns("http://localhost:*", "http://*.hva.nl:*")
+        // Haal de frontend URL uit de omgevingsvariabele of gebruik een standaard waarde
+        String frontendUrl = System.getenv("FRONTEND_URL");
+        if (frontendUrl == null || frontendUrl.isEmpty()) {
+            frontendUrl = "https://election-frontendd.onrender.com"; // Standaard Render frontend URL
+        }
+
+        // Stel CORS in voor alle endpoints
+        registry.addMapping("/**")  // Toepassen op alle API endpoints
+                .allowedOrigins(frontendUrl)  // Sta alleen toegang toe vanaf de frontend URL
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*")
-                .allowCredentials(true);
+                .allowedHeaders("Content-Type", "Authorization")
+                .allowCredentials(true);  // Sta credentials toe, bijvoorbeeld cookies of authorization headers
     }
 }
