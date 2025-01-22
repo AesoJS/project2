@@ -137,7 +137,7 @@ export default {
   methods: {
     registerUser() {
       axios
-          .post("http://localhost:8080/api/register", this.user)
+          .post("http://election-backend-cmsa.onrender.com/api/register", this.user)
           .then((response) => {
             this.message = response.data;
           })

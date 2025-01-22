@@ -74,7 +74,7 @@ export default {
     // Haal alle onderwerpen van de server op
     async fetchTopics() {
       try {
-        const response = await axios.get("http://localhost:8080/api/forum/topics/latest")
+        const response = await axios.get("http://election-backend-cmsa.onrender.com/api/forum/topics/latest")
         this.topics = response.data;
         console.log("response fetch", this.topics);
       } catch (error) {
@@ -86,7 +86,7 @@ export default {
     async postNewTopic() {
       try {
         this.newTopic.createdBy = this.createdBy;
-        await axios.post("http://localhost:8080/api/forum/topics", this.newTopic);
+        await axios.post("http://election-backend-cmsa.onrender.com/api/forum/topics", this.newTopic);
         this.newTopic.title = "";
         this.newTopic.content = "";
         this.fetchTopics(); // Herlaad de onderwerpen na het plaatsen
@@ -98,7 +98,7 @@ export default {
 
     async fetchUsername() {
       try {
-        const response = await axios.get("http://localhost:8080/api/user", {
+        const response = await axios.get("http://election-backend-cmsa.onrender.com/api/user", {
           params: {email: this.email},
         });
         if (response.data) {

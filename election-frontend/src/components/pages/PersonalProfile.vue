@@ -102,7 +102,7 @@ export default defineComponent({
   methods: {
     async fetchUserInfoByEmail() {
       try {
-        const response = await axios.get(`http://localhost:8080/api/user`, {
+        const response = await axios.get(`http://election-backend-cmsa.onrender.com/api/user`, {
           params: { email: this.email }
         });
         this.user = response.data;
@@ -131,7 +131,7 @@ export default defineComponent({
     },
     async saveChanges() {
       try {
-        const response = await axios.put(`http://localhost:8080/api/user/update`, this.editedUser);
+        const response = await axios.put(`http://election-backend-cmsa.onrender.com/api/user/update`, this.editedUser);
         this.user = { ...this.editedUser };
         this.editMode = false;
       } catch (error) {

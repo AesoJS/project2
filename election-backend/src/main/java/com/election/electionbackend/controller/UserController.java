@@ -5,17 +5,21 @@ import com.election.electionbackend.service.UserService;
 import com.election.electionbackend.util.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:5173") // Allow CORS for the Vue.js frontend
+@CrossOrigin(origins = "${app.frontend.url}")  // Dynamic CORS Origin
 public class UserController {
 
     private final UserService userService;
     private final JwtUtil jwtUtil;
+
+    @Value("${app.frontend.url}")
+    private String frontendUrl;  // Inject the frontend URL from the environment
 
     public UserController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
@@ -117,4 +121,3 @@ public class UserController {
         return user.getEmail() + "-token"; // Simplified token for demonstration purposes
     }
 }
-

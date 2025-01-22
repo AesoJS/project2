@@ -56,7 +56,7 @@ export default {
   methods: {
     async fetchUsers() {
       try {
-        const response = await axios.get('http://localhost:8080/api/admin/users');
+        const response = await axios.get('http://election-backend-cmsa.onrender.com/api/admin/users');
         this.users = response.data;
       } catch (error) {
         this.message = 'Error fetching users or you do not have admin privileges.';

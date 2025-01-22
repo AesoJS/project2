@@ -37,7 +37,7 @@ export default {
       try {
         const { id } = this.$route.params;
         console.log("Fetching topic with ID:", id); // Log de ID
-        const response = await axios.get(`http://localhost:8080/api/forum/topics/${id}`);
+        const response = await axios.get(`http://election-backend-cmsa.onrender.com/api/forum/topics/${id}`);
         console.log("Response data:", response.data); // Log de data die terugkomt
         this.topic = response.data;
       } catch (error) {

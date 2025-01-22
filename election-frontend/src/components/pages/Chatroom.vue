@@ -15,7 +15,7 @@ export default {
     };
   },
   created() {
-    this.socket = new WebSocket("ws://localhost:8080/chat");
+    this.socket = new WebSocket("ws://election-backend-cmsa.onrender.com/chat");
     this.socket.onmessage = (event) => {
       this.messages.push(event.data);
     };

@@ -25,13 +25,18 @@ import { defineComponent } from 'vue';
 import navbar from "@/components/NavBar.vue";
 import axios from 'axios';
 
+// Define an interface for the backend status response
+interface BackendStatus {
+  message: string;
+}
+
 export default defineComponent({
   components: {
     navbar,
   },
   data() {
     return {
-      backendStatus: null, // Holds the backend status response
+      backendStatus: null as BackendStatus | null,  // Define the type explicitly
     };
   },
   mounted() {
@@ -40,20 +45,21 @@ export default defineComponent({
   methods: {
     // Use Axios to fetch backend status
     fetchBackendStatus() {
-      axios.get('http://localhost:8080/test')
+      const apiUrl = process.env.VUE_APP_API_URL || 'http://localhost:8080'; // Fallback to localhost if not set
+      axios.get<BackendStatus>(`${apiUrl}/test`) // Define the expected response type
           .then(response => {
             this.backendStatus = response.data;
           })
           .catch(error => {
             console.error('Error fetching backend status:', error);
-            this.backendStatus = { message: 'Error connecting to backend' };
+            this.backendStatus = { message: 'Error connecting to backend' }; // Fallback to an error message
           });
     }
   }
 });
 </script>
 
-<style>
+<style scoped>
 .backend-status {
   margin-top: 20px;
 }

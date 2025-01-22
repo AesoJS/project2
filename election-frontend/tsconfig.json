@@ -13,7 +13,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["vite/client"],
+    "types": ["vite/client", "node"],  // Add "node" to the types array
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]

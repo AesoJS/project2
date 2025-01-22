@@ -15,8 +15,13 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     // Enable CORS globally for your frontend URL
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        String frontendUrl = System.getenv("FRONTEND_URL");  // Get frontend URL from environment variable
+        if (frontendUrl == null || frontendUrl.isEmpty()) {
+            frontendUrl = "http://localhost:5173";  // Default to localhost during local development
+        }
+
         registry.addMapping("/**")  // Apply to all endpoints
-                .allowedOrigins("http://localhost:5173", "http://*.hva.nl:*")  // Allow both localhost and frontend Docker container
+                .allowedOrigins(frontendUrl)  // Use dynamic frontend URL
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("Content-Type", "Authorization")
                 .allowCredentials(true); // Allow credentials if needed
