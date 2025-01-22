@@ -1,0 +1,22 @@
+services:
+  frontend:
+    build:
+      context: ./election-frontend  # Verwijs naar je frontend directory
+      dockerfile: Dockerfile  # Zorg ervoor dat dit klopt naar de Dockerfile in de frontend directory
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./election-backend  # Verwijs naar je backend directory
+      dockerfile: Dockerfile  # Zorg ervoor dat dit klopt naar de Dockerfile in de backend directory
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

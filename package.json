@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "heroku": "^8.7.1",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@vue/runtime-dom": "^3.5.13",
+    "vue-tsc": "^2.2.0"
+  }
+}

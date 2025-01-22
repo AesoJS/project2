@@ -1,0 +1,13 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+	url = https://gitlab.fdmci.hva.nl/semester-3-hbo-ict/onderwijs/student-projecten/2024-2025/out-s-se-gd/semester-1/biibeehaafii44.git
+	fetch = +refs/*:refs/*
+	mirror = true
+[remote "github"]
+	url = https://github.com/mohammedakhlifi/s3e-S205-Team-3.git
+	fetch = +refs/heads/*:refs/remotes/github/*
